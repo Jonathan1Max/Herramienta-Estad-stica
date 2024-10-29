@@ -1,0 +1,135 @@
+1. Descripción General
+En este sistema, se modela un conjunto de vehículos utilizando los principios de Programación Orientada a Objetos (POO). Los conceptos principales aplicados son encapsulamiento, herencia, abstracción, y polimorfismo. Se han utilizado una interfaz y una clase base abstracta para definir un diseño modular y reutilizable.
+
+2. Interfaz IVehiculo
+Definición:
+
+java
+Copiar código
+public interface IVehiculo {
+    void arrancar();
+    void detener();
+}
+Uso:
+
+La interfaz IVehiculo define un contrato que todos los vehículos deben cumplir. Es decir, cualquier clase que implemente esta interfaz debe proporcionar implementaciones concretas para los métodos arrancar() y detener().
+Propósito: La interfaz permite definir un conjunto de métodos que los vehículos deben implementar, garantizando que todos los tipos de vehículos tendrán estas funcionalidades básicas.
+3. Clase Base Abstracta Vehiculo
+Definición:
+
+java
+Copiar código
+public abstract class Vehiculo implements IVehiculo {
+    protected String marca;
+    protected String modelo;
+    protected int año;
+
+    public Vehiculo(String marca, String modelo, int año) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.año = año;
+    }
+
+    public abstract void arrancar();  // Método abstracto
+
+    @Override
+    public void detener() {
+        System.out.println("El vehículo se ha detenido.");
+    }
+
+    public String getInfo() {
+        return marca + " " + modelo + " (" + año + ")";
+    }
+}
+Uso:
+
+Encapsulación: Los atributos marca, modelo, y año están protegidos (protected), lo que significa que son accesibles para la clase base Vehiculo y sus subclases, pero no desde fuera de estas clases. Esto protege la integridad de los datos al limitar el acceso directo.
+Constructores: El constructor de la clase Vehiculo inicializa los atributos marca, modelo, y año. Este constructor se llama cuando se crea una instancia de una subclase.
+Métodos abstractos y concretos: arrancar() es un método abstracto, lo que significa que no tiene implementación en la clase Vehiculo y debe ser implementado por las subclases. detener() tiene una implementación concreta que es común para todos los vehículos.
+Método getInfo(): Proporciona una representación textual del vehículo, que puede ser útil para mostrar información en una forma legible.
+4. Subclases Coche y Moto
+Clase Coche
+Definición:
+
+java
+Copiar código
+public class Coche extends Vehiculo {
+    private int numeroDePuertas;
+
+    public Coche(String marca, String modelo, int año, int numeroDePuertas) {
+        super(marca, modelo, año);  // Llama al constructor de la clase base
+        this.numeroDePuertas = numeroDePuertas;
+    }
+
+    @Override
+    public void arrancar() {
+        System.out.println("El coche " + getInfo() + " está arrancando con llave.");
+    }
+
+    public int getNumeroDePuertas() {
+        return numeroDePuertas;
+    }
+}
+Uso:
+
+Herencia: Coche hereda de Vehiculo, lo que significa que obtiene los atributos marca, modelo, y año y el método detener() de la clase base.
+Método arrancar(): Implementa la versión específica de arrancar() para coches, mostrando cómo arranca un coche con una llave.
+Atributo numeroDePuertas: Especifica un detalle adicional de los coches, no común a todos los vehículos. Este atributo es privado para encapsularlo y protegerlo, permitiendo el acceso solo a través del método getNumeroDePuertas().
+Clase Moto
+Definición:
+
+java
+Copiar código
+public class Moto extends Vehiculo {
+    private boolean tieneMaletero;
+
+    public Moto(String marca, String modelo, int año, boolean tieneMaletero) {
+        super(marca, modelo, año);  // Llama al constructor de la clase base
+        this.tieneMaletero = tieneMaletero;
+    }
+
+    @Override
+    public void arrancar() {
+        System.out.println("La moto " + getInfo() + " está arrancando con botón.");
+    }
+
+    public boolean tieneMaletero() {
+        return tieneMaletero;
+    }
+}
+Uso:
+
+Herencia: Moto también hereda de Vehiculo y obtiene los atributos y métodos de la clase base.
+Método arrancar(): Proporciona una implementación específica para motos, mostrando cómo arranca una moto con un botón.
+Atributo tieneMaletero: Especifica un detalle adicional para motos. Está encapsulado (privado) y se accede a través del método tieneMaletero().
+5. Clase Principal TestVehiculos
+Definición:
+
+java
+Copiar código
+public class TestVehiculos {
+    public static void main(String[] args) {
+        Vehiculo coche = new Coche("Toyota", "Corolla", 2021, 4);
+        Vehiculo moto = new Moto("Honda", "CB500", 2019, true);
+
+        coche.arrancar();  // "El coche Toyota Corolla (2021) está arrancando con llave."
+        moto.arrancar();   // "La moto Honda CB500 (2019) está arrancando con botón."
+
+        coche.detener();   // "El vehículo se ha detenido."
+        moto.detener();    // "El vehículo se ha detenido."
+    }
+}
+Uso:
+
+Polimorfismo: Aunque coche y moto son tratados como Vehiculo, el método arrancar() se comporta de manera diferente según el tipo específico del objeto (Coche o Moto), demostrando polimorfismo.
+Interacción: La clase principal crea instancias de Coche y Moto, llama a sus métodos y muestra cómo cada tipo de vehículo maneja sus acciones de manera específica.
+
+
+Conclusión
+El diseño utiliza los principios de POO para crear un sistema de vehículos flexible y reutilizable. Cada componente cumple con su rol específico:
+
+Encapsulamiento para proteger los datos y controlar el acceso.
+Herencia para compartir y extender características comunes.
+Abstracción para definir lo que hacen los vehículos sin especificar cómo.
+Polimorfismo para permitir que diferentes tipos de vehículos manejen acciones similares de manera distinta.
+Este enfoque modular y estructurado facilita la extensión y mantenimiento del sistema, permitiendo añadir nuevos tipos de vehículos sin modificar el código existente de manera significativa.

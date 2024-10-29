@@ -1,0 +1,37 @@
+{
+    "libros": [
+        {
+            "paginas": 417,
+            "genero": "Realismo mágico",
+            "titulo": "Cien Años de Soledad",
+            "autor": "Gabriel García Márquez"
+        },
+        {
+            "paginas": 328,
+            "genero": "Distopía",
+            "titulo": "1984",
+            "autor": "George Orwell"
+        },
+        {
+            "paginas": 310,
+            "genero": "Fantasía",
+            "titulo": "El Hobbit",
+            "autor": "J.R.R. Tolkien"
+        },
+        {
+            "paginas": 863,
+            "genero": "Clásico",
+            "titulo": "Don Quijote de la Mancha",
+            "autor": "Miguel de Cervantes"
+        },
+        {
+            "paginas": 279,
+            "genero": "Romance",
+            "titulo": "Orgullo y Prejuicio",
+            "autor": "Jane Austen"
+        }
+    ],
+    "cantidadDeLibros": 5,
+    "disponibilidad": true,
+    "mensaje": "Lista de libros recomendados"
+}
